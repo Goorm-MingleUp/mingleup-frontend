@@ -1,3 +1,60 @@
+# MingleUp 프론트엔드
+
+## 1주차 안내사항
+
+각 절차별 진행 해 주시고 문제, 질문 발생시 프론트 팀장에게 문의 바랍니다.
+
+1. git clone 진행하기
+
+~/본인희망경로
+
+
+2. 프로젝트 실행하기
+
+```sh
+# cs ~/프로젝트경로
+
+npm install
+npm run build # 생략가능
+npm run dev
+```
+
+3. 각자 과제 작업을 위한 브렌치 생성하기
+
+```sh
+git checkout -b <branch명>
+```
+
+4. 1주차 과제 민들기
+
+[figme](https://www.figma.com/design/Qr8HXnPY8lhKxhVA5e6gAZ/%EA%B5%AC%EB%A6%84%ED%8C%8C%EC%9D%B4%EB%84%90%ED%94%8C%EC%A0%9D---MingleUp?node-id=0-1&p=f&t=2jquaetgBLzcqpwJ-0) 문서 확인 후 본인이 맡은 컴포넌트 제작합니다.
+
+```js
+//  ex ~/src/components/Button.tsx 생성
+
+// function Button() {} 제작
+
+// ~/src/pages/index/+Page.tsx
+// 결과물 제출을 위해 해당 경로에 주석 달아 놨습니다. 해당 주석 하단에 작업물 import 해주시면 됩니다.
+
+<h1 className={"font-bold text-3xl pb-4"}>1주차 멘토링 과제</h1>
+
+{/* TODO: 1주차 프론트 팀미션 UI 컴포넌트 만들기  */}
+
+{/* Button/Input  */}
+
+{/* Modal  */}
+
+{/* Dropdown */}
+```
+
+5. 작업 완료 후 커밋 및 PR 날리기
+
+6. 멘토링 참여하기~
+
+
+---------------------------
+
 Generated with [vike.dev/new](https://vike.dev/new) ([version 498](https://www.npmjs.com/package/create-vike/v/0.0.498)) using this command:
 
 ```sh

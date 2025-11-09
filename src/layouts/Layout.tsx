@@ -1,8 +1,9 @@
 import "./Layout.css";
+import "../styles/index.scss";
 
 import "./tailwind.css";
 import logoUrl from "../assets/logo.svg";
-import { Link } from "../components/Link.js";
+import { Link } from "../components/Link";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -29,7 +30,7 @@ function Sidebar({ children }: { children: React.ReactNode }) {
 function Content({ children }: { children: React.ReactNode }) {
   return (
     <div id="page-container">
-      <div id="page-content" className={"p-5 pb-12 min-h-screen"}>
+      <div id="page-content" className={"p-5 pb-12 min-h-screen container"}>
         {children}
       </div>
     </div>
