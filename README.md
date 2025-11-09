@@ -6,18 +6,25 @@
 
 1. git clone 진행하기
 
-~/본인희망경로
+```sh
+# ~/본인희망경로>
+git clone git@github.com:Goorm-MingleUp/mingleup-frontend.git
+```
 
+<img width="1472" height="583" alt="스크린샷 2025-11-09 오후 2 33 22" src="https://github.com/user-attachments/assets/0fb06c71-a1c7-47e2-8122-71ee4c99c0f3" />
 
 2. 프로젝트 실행하기
 
 ```sh
-# cs ~/프로젝트경로
+# cd ~/프로젝트경로
 
 npm install
 npm run build # 생략가능
 npm run dev
 ```
+보여야 하는 화면
+<img width="1025" height="404" alt="스크린샷 2025-11-09 오후 2 33 58" src="https://github.com/user-attachments/assets/66ccf611-b0e2-42bf-8cfc-b27f8a1362b9" />
+
 
 3. 각자 과제 작업을 위한 브렌치 생성하기
 
@@ -30,7 +37,7 @@ git checkout -b <branch명>
 [figme](https://www.figma.com/design/Qr8HXnPY8lhKxhVA5e6gAZ/%EA%B5%AC%EB%A6%84%ED%8C%8C%EC%9D%B4%EB%84%90%ED%94%8C%EC%A0%9D---MingleUp?node-id=0-1&p=f&t=2jquaetgBLzcqpwJ-0) 문서 확인 후 본인이 맡은 컴포넌트 제작합니다.
 
 ```js
-//  ex ~/src/components/Button.tsx 생성
+//  ex: ~/src/components/Button.tsx 생성
 
 // function Button() {} 제작
 
@@ -54,6 +61,8 @@ git checkout -b <branch명>
 
 
 ---------------------------
+
+프로젝트 init 파일이라 이후부터는 1주차 안내사황 내용 X
 
 Generated with [vike.dev/new](https://vike.dev/new) ([version 498](https://www.npmjs.com/package/create-vike/v/0.0.498)) using this command:
 
