@@ -4,10 +4,11 @@ import "../styles/index.scss";
 import "./tailwind.css";
 import logoUrl from "../assets/logo.svg";
 import { Link } from "../components/Link";
+import PopupComponent from '../components/popup/Popup';
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout({children}: {children: React.ReactNode}) {
   return (
-    <div className={"flex max-w-5xl m-auto"}>
+    <div className={'flex max-w-5xl m-auto'}>
       <Sidebar>
         <Logo />
         <Link href="/">Welcome</Link>
@@ -15,6 +16,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <Link href="/star-wars">Data Fetching</Link>
       </Sidebar>
       <Content>{children}</Content>
+
+      <PopupComponent />
     </div>
   );
 }
