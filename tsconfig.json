@@ -19,12 +19,15 @@
       "@/*": [
         "./*"
       ]
-    }
+    },
+    "types": [
+      "vite/client"
+    ]
   },
   "include": [
-    "src/*/"
+    "src/**/*"
   ],
   "exclude": [
     "dist"
-  ]
+  ],
 }
