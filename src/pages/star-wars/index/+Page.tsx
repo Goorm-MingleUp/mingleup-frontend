@@ -1,5 +1,5 @@
-import { useData } from "vike-react/useData";
-import type { Data } from "./+data.js";
+import {useData} from 'vike-react/useData';
+import type {Data} from './+data.js';
 
 export default function Page() {
   const movies = useData<Data>();
@@ -7,7 +7,7 @@ export default function Page() {
     <>
       <h1>Star Wars Movies</h1>
       <ol>
-        {movies.map(({ id, title, release_date }) => (
+        {movies.map(({id, title, release_date}) => (
           <li key={id}>
             <a href={`/star-wars/${id}`}>{title}</a> ({release_date})
           </li>
