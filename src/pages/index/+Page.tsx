@@ -13,7 +13,12 @@ interface ConfirmData {
 >>>>>>> a9ef791 (feat: 검색창 컴포넌트 생성 완료)
 
 export default function Page() {
+<<<<<<< HEAD
   const {form} = usePopup();
+=======
+  const {alert, confirm, form} = usePopup();
+
+>>>>>>> daaaeb1 (refactor(popup): popup componets use createPortal)
   const nameInput = useInput({
     // 인풋 예시입니다
     initialValue: '',
