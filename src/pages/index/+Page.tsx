@@ -10,7 +10,8 @@ interface ConfirmData {
 }
 
 export default function Page() {
-  const {openPopup} = usePopup();
+  const {alert, confirm, form} = usePopup();
+
   const nameInput = useInput({
     // 인풋 예시입니다
     initialValue: '',
@@ -73,30 +74,26 @@ export default function Page() {
       />
 
       {/* Modal  */}
-      <button
+      <Button
+        className="h-12 rounded-4xl"
         onClick={() => {
-          openPopup<'confirm', ConfirmData>('confirm', {
-            header: {
-              title: '닉네임 입력',
-            },
-            body: (
-              <div>
-                안녕하세요.
-                <br />
-                <input className="border" id="userName" type="text" />
-              </div>
+          form<{name: string; age: number}>({
+            header: {title: '신청하기 전에', close: true},
+            form: (
+              <>
+                <label>이름</label>
+                <input name="name" className="border p-2 w-full mb-4" />
+
+                <label>나이</label>
+                <input name="age" className="border p-2 w-full" />
+              </>
             ),
-            footer: {
-              buttonText: ['취소', '확인'],
-            },
-            onConfirm: data => {
-              console.log(data?.userName);
-            },
+            onSubmit: data => console.log(data),
           });
         }}
       >
-        열기
-      </button>
+        신청하기
+      </Button>
 
       {/* Dropdown */}
     </>
