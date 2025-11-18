@@ -5,15 +5,8 @@ import {useInput} from '../../components/input/useInput';
 import SearchInput from '../../components/search/Search';
 import {useSearch} from '../../components/search/useSearch';
 
-interface ConfirmData {
-  userName: string;
-}
-
 export default function Page() {
-  const {alert, confirm, form} = usePopup();
-
-
-export default function Page() {
+  const {form} = usePopup();
   const nameInput = useInput({
     // 인풋 예시입니다
     initialValue: '',
