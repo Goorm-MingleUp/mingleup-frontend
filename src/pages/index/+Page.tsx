@@ -12,6 +12,8 @@ interface ConfirmData {
 export default function Page() {
   const {alert, confirm, form} = usePopup();
 
+
+export default function Page() {
   const nameInput = useInput({
     // 인풋 예시입니다
     initialValue: '',
