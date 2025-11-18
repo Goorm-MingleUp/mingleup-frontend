@@ -1,7 +1,7 @@
-import type { Config } from "vike/types";
-import vikePhoton from "vike-photon/config";
-import vikeReact from "vike-react/config";
-import Layout from "../layouts/Layout.js";
+import type {Config} from 'vike/types';
+import vikePhoton from 'vike-photon/config';
+import vikeReact from 'vike-react/config';
+import Layout from '../layouts/Layout.js';
 
 // Default config (can be overridden by pages)
 // https://vike.dev/config
@@ -11,9 +11,9 @@ export default {
   Layout,
 
   // https://vike.dev/head-tags
-  title: "MingleUp",
+  title: 'MingleUp',
 
-  description: "Demo showcasing Vike",
+  description: 'Demo showcasing Vike',
   extends: [vikeReact, vikePhoton],
   prerender: true,
 } satisfies Config;
