@@ -1,6 +1,15 @@
 {
-  "version": 3,
-  "framework": null,
+  "version": 2,
+  "builds": [
+    {
+      "src": "server/index.mjs",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "client/assets/**",
+      "use": "@vercel/static"
+    }
+  ],
   "routes": [
     {
       "src": "/assets/(.*)",
@@ -8,7 +17,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "server/index.mjs"
+      "dest": "/server/index.mjs"
     }
   ]
 }
