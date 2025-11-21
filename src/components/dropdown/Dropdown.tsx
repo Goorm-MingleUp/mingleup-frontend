@@ -7,13 +7,7 @@ export interface DropdownOption {
   value: string;
 }
 
-export interface DropdownProps {
-  options: DropdownOption[];
-  placeholder?: string;
-  value?: string | null;
-  onChange?: (value: string) => void;
-  disabled?: boolean;
-
+export interface DropdownCustomStyle {
   /** 드롭다운 전체 래퍼에 줄 className (width, margin 등) */
   wrapperClassName?: string;
   /** 닫힌 상태 박스(버튼)에 줄 className (내부 padding, width 등) */
@@ -24,15 +18,19 @@ export interface DropdownProps {
   optionClassName?: string;
 }
 
+export interface DropdownProps {
+  options: DropdownOption[];
+  placeholder?: string;
+  value?: string | null;
+  onChange?: (value: string) => void;
+  disabled?: boolean;
+
+  /** 스타일 관련 props를 한 번에 받는 객체 */
+  customStyle?: DropdownCustomStyle;
+}
+
 /**
  * 공용 Dropdown 컴포넌트
- *
- * - 텍스트 크기: 16px
- * - placeholder 색: #838383
- * - 선택 텍스트 색: #000000
- * - 닫힌 박스 / 옵션 박스 모두 border-radius: 20px
- * - 옵션 아이템 border-radius: 15px
- * - width / padding은 className으로 페이지에서 조절 가능
  */
 export default function Dropdown({
   options,
@@ -40,12 +38,16 @@ export default function Dropdown({
   value = null,
   onChange,
   disabled = false,
-  wrapperClassName = '',
-  buttonClassName = '',
-  optionListClassName = '',
-  optionClassName = '',
+  customStyle,
 }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const {
+    wrapperClassName = '',
+    buttonClassName = '',
+    optionListClassName = '',
+    optionClassName = '',
+  } = customStyle ?? {};
 
   const selectedOption = options.find(opt => opt.value === value) ?? null;
 
@@ -83,9 +85,9 @@ export default function Dropdown({
         <span className={textClassName}>{selectedOption ? selectedOption.label : placeholder}</span>
 
         <img
-          src={isOpen ? ExpandingIcon : ExpandedIcon} // 열리면 Expanding, 닫히면 Expanded
+          src={isOpen ? ExpandingIcon : ExpandedIcon}
           alt="드롭다운 상태 아이콘"
-          className="w-5 h-5 ml-2" // 20px = 5 * 4px
+          className="w-5 h-5 ml-2" // 20px
         />
       </button>
 
@@ -118,6 +120,7 @@ export default function Dropdown({
                 'rounded-[15px]',
                 'hover:bg-[#F8E8EE]',
                 'm-0',
+                'cursor-pointer',
                 optionClassName,
               ].join(' ')}
             >

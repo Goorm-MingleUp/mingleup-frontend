@@ -24,10 +24,12 @@ export default function Page() {
       <Dropdown
         options={OPTIONS}
         placeholder="옵션을 선택해주세요"
-        wrapperClassName="w-[240px]"
-        buttonClassName="w-full px-4 py-2"
-        optionListClassName="w-full"
-        optionClassName="w-full"
+        customStyle={{
+          wrapperClassName: 'w-[240px]',
+          buttonClassName: 'w-full', // padding은 컴포넌트에서 이미 px-25/py-20
+          optionListClassName: 'w-full',
+          optionClassName: 'w-full',
+        }}
         {...dropdown.bind}
       />
     </>
