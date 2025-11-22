@@ -4,6 +4,14 @@ import Button from '../../components/button/Button';
 import {useInput} from '../../components/input/useInput';
 import SearchInput from '../../components/search/Search';
 import {useSearch} from '../../components/search/useSearch';
+import Dropdown from '../../components/dropdown/Dropdown';
+import {useDropdown} from '../../components/dropdown/useDropdown';
+
+const OPTIONS = [
+  {label: '옵션 1', value: 'opt1'},
+  {label: '옵션 2', value: 'opt2'},
+  {label: '옵션 3', value: 'opt3'},
+];
 
 export default function Page() {
   const {form} = usePopup();
@@ -27,6 +35,7 @@ export default function Page() {
       // 여기서 API 호출 같은 거 하면 됨
     },
   });
+  const dropdown = useDropdown();
 
   return (
     <>
@@ -91,6 +100,17 @@ export default function Page() {
       </Button>
 
       {/* Dropdown */}
+      <Dropdown
+        options={OPTIONS}
+        placeholder="옵션을 선택해주세요"
+        customStyle={{
+          wrapperClassName: 'w-[240px]',
+          buttonClassName: 'w-full', // padding은 컴포넌트에서 이미 px-25/py-20
+          optionListClassName: 'w-full',
+          optionClassName: 'w-full',
+        }}
+        {...dropdown.bind}
+      />
     </>
   );
 }
