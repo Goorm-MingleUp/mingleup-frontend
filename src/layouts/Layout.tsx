@@ -50,8 +50,8 @@ function Footer() {
 
 function Header() {
   return (
-    <div id="header" className={'box-border border-b border-b-gray-200'}>
-      <header className="flex shrink-0 items-center justify-between container h-20">
+    <div id="header" className={'fixed  top-0 w-full bg-white box-border border-b border-b-gray-200 z-10'}>
+      <header className=" flex shrink-0 items-center justify-between container h-20">
         <div className="flex items-center gap-32">
           <Logo />
 
@@ -59,7 +59,9 @@ function Header() {
           <Link href="/">파티</Link>
         </div>
 
-        <div>로그인</div>
+        <div>
+          <Link href="/member">로그인</Link>
+        </div>
       </header>
     </div>
   );
