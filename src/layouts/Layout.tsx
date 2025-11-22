@@ -5,6 +5,7 @@ import './tailwind.css';
 import logoUrl from '../assets/images/logo.svg';
 import {Link} from '../components/Link';
 import PopupComponent from '../components/popup/Popup';
+import FooterLogo from '../assets/images/footer_logo.svg';
 
 export default function Layout({children}: {children: React.ReactNode}) {
   return (
@@ -23,7 +24,10 @@ function Footer() {
     <div id="footer" className={'box-border bg-gray-100 min-h-48'}>
       <footer className="py-6 container  mx-auto">
         <div className="flex justify-between mb-10">
-          <strong className="text-gray-600 text-sm font-normal">© 2025 MingleUp. All rights reserved.</strong>
+          <div>
+            <img src={FooterLogo} alt="브렌드로고" className="block mb-2 w-32" loading="lazy" />
+            <strong className="text-gray-600 text-sm font-normal">© 2025 MingleUp. All rights reserved.</strong>
+          </div>
           <ul className="flex text-gray-600 text-sm ">
             <li className="after:content-['|'] after:mx-1">이용약관</li>
             <li>개인정보 처리방침</li>
@@ -50,8 +54,8 @@ function Footer() {
 
 function Header() {
   return (
-    <div id="header" className={'box-border border-b border-b-gray-200'}>
-      <header className="flex shrink-0 items-center justify-between container h-20">
+    <div id="header" className={'fixed  top-0 w-full bg-white box-border border-b border-b-gray-200 z-10'}>
+      <header className=" flex shrink-0 items-center justify-between container h-20">
         <div className="flex items-center gap-32">
           <Logo />
 
@@ -59,7 +63,9 @@ function Header() {
           <Link href="/">파티</Link>
         </div>
 
-        <div>로그인</div>
+        <div>
+          <Link href="/login">로그인</Link>
+        </div>
       </header>
     </div>
   );
@@ -68,9 +74,9 @@ function Header() {
 function Content({children}: {children: React.ReactNode}) {
   return (
     <div id="page-container">
-      <div id="page-content" className={'pb-12 min-h-screen container'}>
+      <main id="page-content" className={'pt-20 pb-12 min-h-screen container'}>
         {children}
-      </div>
+      </main>
     </div>
   );
 }
