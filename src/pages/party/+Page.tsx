@@ -1,6 +1,6 @@
-import {Suspense} from 'react';
+import {lazy, Suspense} from 'react';
 import SearchInput from '../../components/search/Search';
-import PartyList from './components/PartyList';
+const PartyList = lazy(() => import('./components/PartyList'));
 
 function PartyPage() {
   return (
