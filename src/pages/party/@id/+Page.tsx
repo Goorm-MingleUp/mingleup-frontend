@@ -2,7 +2,7 @@ function PartyDetail() {
   return (
     <>
       {/* PC 레이아웃 */}
-      <div className="relative md:grid grid-cols-[4fr_6fr] gap-14">
+      <div className="relative md:grid grid-cols-[3fr_7fr] gap-14 container">
         <aside className="sticky hidden md:block top-22 h-fit">
           <h2 className="sr-only">파티 신청하기 영역</h2>
 
@@ -33,25 +33,63 @@ function PartyDetail() {
             </div>
           </div>
 
-          <div className="mb-8 flex w-full">
-            <button className="flex-1 ">정보</button>
-            <button className="flex-1 ">안내사항</button>
-            <button className="flex-1 ">호스트</button>
-            <button className="flex-1 ">리뷰</button>
+          <div className="sticky top-20 mb-8 flex w-full bg-white z-7 border-t border-b border-stone-300">
+            <button className="flex-1 cursor-pointer h-12 ">정보</button>
+            <button className="flex-1 cursor-pointer h-12 ">안내사항</button>
+            <button className="flex-1 cursor-pointer h-12 ">호스트</button>
+            <button className="flex-1 cursor-pointer h-12 ">리뷰</button>
           </div>
 
           <div
             className="mb-8"
             dangerouslySetInnerHTML={{
-              __html: `<div class="IntroduceHtml_introduce__content__IMSCa" style="white-space: pre-wrap;"><p style="text-align: center"><br></p><p style="text-align: center">찬란하지만 외로운 서울살이,</p><p style="text-align: center">인연 혹은 “연인”을 부담없이 만나요!</p><p style="text-align: center">특별한 크리스마스, 미리 같이 즐겨요❤️❤️</p><p style="text-align: center"><br></p><p style="text-align: center"><br></p><p><img class="ql-image image-loaded" src="http://images.munto.kr/production-socialing/1762403818135-photo-jvmyr-1061517-0"></p><p><br></p><p><img class="ql-image image-loaded" src="http://images.munto.kr/production-socialing/1762510610347-photo-7v6jx-1061517-0"></p><p><br></p><p style="text-align: center">&lt;<strong>오늘의메뉴</strong>&gt; </p><p style="text-align: center">배달음식❌, 모두 직접 조리합니다 </p><p style="text-align: center">닭갈비떡볶이</p><p style="text-align: center">참치주먹밥</p><p style="text-align: center">트러플오일감자튀김</p><p style="text-align: center">야채튀김</p><p style="text-align: center">수제 고르곤졸라 +사양벌꿀</p><p style="text-align: center"><strong>“수제 매실주”</strong>,소,맥,탄산</p><p><br></p><p style="text-align: center">-----2차메뉴-----</p><p style="text-align: center">살라미with트러플오일</p><p style="text-align: center">버번위스키&amp;바닐라빈셔벗</p><p style="text-align: center">구운쥐포</p><p style="text-align: center">벨지안와플쿠키</p><p style="text-align: center">참치샐러드카나페</p><p><br></p><p><br></p><p><img class="ql-image image-loaded" src="http://images.munto.kr/production-socialing/1761468305734-photo-5qa6s-1061517-0"></p><p><br></p><p><br></p><p><br></p><p><img class="ql-image image-loaded" src="http://images.munto.kr/production-socialing/1761468305734-photo-5qa6s-1061517-1"></p><p><br></p><p style="text-align: center">부담없이, 친구or인연을 만들 수 있는 소셜링입니다❤️</p><p><br></p><p><br></p><p><br></p></div>`,
+              __html: `<div class="IntroduceHtml_introduce__content__IMSCa" style="white-space: pre-wrap;"><p style="text-align: center"><br></p><p style="text-align: center">찬란하지만 외로운 서울살이,</p><p style="text-align: center">인연 혹은 “연인”을 부담없이 만나요!</p><p style="text-align: center">특별한 크리스마스, 미리 같이 즐겨요❤️❤️</p><p style="text-align: center"><br></p><p style="text-align: center"><br></p><p><img class="ql-image image-loaded" src="http://images.munto.kr/production-socialing/1762403818135-photo-jvmyr-1061517-0"></p><p><br></p><p><img class="ql-image image-loaded" src="http://images.munto.kr/production-socialing/1762510610347-photo-7v6jx-1061517-0"></p><p><br></p><p style="text-align: center">&lt;<strong>오늘의메뉴</strong>&gt; </p><p style="text-align: center">배달음식❌, 모두 직접 조리합니다 </p><p style="text-align: center">닭갈비떡볶이</p><p style="text-align: center">참치주먹밥</p><p style="text-align: center">트러플오일감자튀김</p><p style="text-align: center">야채튀김</p><p style="text-align: center">수제 고르곤졸라 +사양벌꿀</p><p style="text-align: center"><strong>“수제 매실주”</strong>,소,맥,탄산</p><p><br></p><p style="text-align: center">-----2차메뉴-----</p><p style="text-align: center">살라미with트러플오일</p><p style="text-align: center">버번위스키&amp;바닐라빈셔벗</p><p style="text-align: center">구운쥐포</p><p style="text-align: center">벨지안와플쿠키</p><p style="text-align: center">참치샐러드카나페</p><p><br></p><p><br></p><p><img class="ql-image image-loaded" src="http://images.munto.kr/production-socialing/1761468305734-photo-5qa6s-1061517-0"></p><p><br></p><p><br></p><p><br></p><p><br></p><p style="text-align: center">부담없이, 친구or인연을 만들 수 있는 소셜링입니다❤️</p><p><br></p><p><br></p><p><br></p></div>`,
             }}
           ></div>
 
-          <div className="mb-8">{/* 안내사항 table */}</div>
+          <div className="mb-8">
+            <div>
+              <h3>안내사항</h3>
+            </div>
+            <table className="w-full text-left">
+              <tbody>
+                <tr className="border-b border-gray-200">
+                  <th className="py-2 px-4 w-32 text-gray-600 font-medium">카테고리</th>
+                  <td className="py-2 px-4">음식</td>
+                </tr>
+                <tr className="border-b border-gray-200">
+                  <th className="py-2 px-4 w-32 text-gray-600 font-medium">장소</th>
+                  <td className="py-2 px-4">서울시 ㅇㅇ구</td>
+                </tr>
+                <tr className="border-b border-gray-200">
+                  <th className="py-2 px-4 w-32 text-gray-600 font-medium">시간</th>
+                  <td className="py-2 px-4">상세내용참고</td>
+                </tr>
+                <tr className="border-b border-gray-200">
+                  <th className="py-2 px-4 w-32 text-gray-600 font-medium">인원</th>
+                  <td className="py-2 px-4">10~12명</td>
+                </tr>
+                <tr>
+                  <th className="py-2 px-4 w-32 text-gray-600 font-medium">모집방식</th>
+                  <td className="py-2 px-4">승인제</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-          <div className="mb-8">{/* 호스트 정보 */}</div>
+          <div className="mb-8">
+            <div>
+              <h3>호스트소개</h3>
+            </div>
+            <div>홍길동</div>
+          </div>
 
-          <div className="mb-8">{/* 리뷰 */}</div>
+          <div className="mb-8">
+            <div>
+              <h3>리뷰</h3>
+            </div>
+            <div>아직 작성된 리뷰정보가 없습니다.</div>
+          </div>
         </section>
       </div>
 
