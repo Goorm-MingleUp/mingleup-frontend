@@ -4,9 +4,8 @@ const SVG = `"data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3
 
 function KakaoLogin() {
   const onLogin = async () => {
-    const res = await Http.get('auth/kakao/login');
+    window.location.href = 'http://15.165.203.24:8080/api/v1/auth/kakao/login';
 
-    console.log(res);
   };
 
   return (

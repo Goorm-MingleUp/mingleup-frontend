@@ -1,0 +1,271 @@
+import {Activity, useEffect, useRef, useState} from 'react';
+
+const TABS = [
+  {id: 'info', label: '정보'},
+  {id: 'notice', label: '안내사항'},
+  {id: 'host', label: '호스트'},
+  {id: 'review', label: '리뷰'},
+];
+
+const Like = (color?: string): string => {
+  color = color?.indexOf('#') === -1 ? color : color?.substring(1, color.length);
+  return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='15' viewBox='0 0 16 15' fill='%23${color}'%3E%3Cpath stroke='%23${color}' stroke-width='2' stroke-miterlimit='10' d='M8 13.1332L2.10906 7.34829C1.399 6.65081 1 5.70498 1 4.71871C1 3.73244 1.399 2.78661 2.10906 2.08913C2.81932 1.39183 3.78245 1 4.78678 1C5.79111 1 6.75424 1.39183 7.46449 2.08913L8 2.61501L8.53551 2.08913C9.24557 1.39183 10.2089 1 11.2132 1C12.2175 1 13.1807 1.39183 13.8909 2.08913C14.601 2.78661 15 3.73244 15 4.71871C15 5.70498 14.601 6.65081 13.8909 7.34829L8 13.1332Z'/%3E%3C/svg%3E%0A`;
+};
+
+function SectionHeader({title, subText}: {title: string; subText?: string}) {
+  return (
+    <div className="mb-3 bg-white">
+      <h3 className="text-xl font-semibold">{title}</h3>
+      <Activity mode={!subText ? 'hidden' : 'visible'}>
+        <p className="mt-1 text-sm text-stone-500">{subText}</p>
+      </Activity>
+    </div>
+  );
+}
+
+interface TabsProps {
+  tabs: {id: string; label: string}[];
+  activeTab: string;
+  onClick: (id: string) => void;
+  tabRef: React.RefObject<HTMLDivElement | null>;
+}
+
+function Tabs({tabs, activeTab, onClick, tabRef}: TabsProps) {
+  return (
+    <div ref={tabRef} className="sticky top-20 mb-8 flex w-full bg-white z-1 border-t border-b border-stone-300">
+      {tabs.map(tab => (
+        <button
+          key={tab.id}
+          className={`flex-1 h-12 cursor-pointer ${
+            activeTab === tab.id ? 'border-b-2 border-pink-500 font-semibold' : ''
+          }`}
+          onClick={() => onClick(tab.id)}
+        >
+          {tab.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function StickyApplyBox() {
+  return (
+    <aside className="sticky hidden md:block top-22 h-fit">
+      <h2 className="sr-only">파티 신청하기 영역</h2>
+
+      <div className="flex flex-col">
+        <div className="mb-4">
+          <span className="px-3.5 py-1.5 bg-[#FDCEDF] text-[#F9027A] rounded-xl text-xs">추천</span>
+        </div>
+
+        <div className="flex flex-col mb-4">
+          <strong className="mb-2 text-2xl font-normal">100% 익명보장 즉석만남 소개팅</strong>
+          <span className="text-stone-500 ">강남구 · 커뮤니티 25.11.1(토) 오후 18:00</span>
+        </div>
+      </div>
+
+      <div className="flex gap-2">
+        <button className="flex-2 w-full flex gap-2 items-center justify-center px-4 py-3 bg-white text-black border rounded-lg cursor-pointer border-[#999]">
+          <i
+            aria-hidden
+            className="block w-6 h-6 bg-no-repeat bg-center"
+            style={{backgroundImage: `url("${Like('#999')}")`}}
+          ></i>
+          <strong className="text-[#999] font-normal">
+            9<span className="sr-only">개</span>
+          </strong>
+        </button>
+        <button className="flex-8 py-3 bg-[#FDCEDF] text-black rounded-lg cursor-pointer">신청하기</button>
+      </div>
+    </aside>
+  );
+}
+
+function InfoSection({}: {innerHtml: string}) {
+  const [isShow, setIsShow] = useState<boolean>(false);
+  const onMoreContents = () => {
+    setIsShow(true);
+  };
+
+  return (
+    <div className="relative">
+      <div
+        className={`${isShow ? '' : 'max-h-[600px]'} overflow-hidden`}
+        dangerouslySetInnerHTML={{
+          __html: `<div class="IntroduceHtml_introduce__content__IMSCa" style="white-space: pre-wrap;"><p style="text-align: center"><br></p><p style="text-align: center">찬란하지만 외로운 서울살이,</p><p style="text-align: center">인연 혹은 “연인”을 부담없이 만나요!</p><p style="text-align: center">특별한 크리스마스, 미리 같이 즐겨요❤️❤️</p><p style="text-align: center"><br></p><p style="text-align: center"><br></p><p><img class="ql-image image-loaded" src="http://images.munto.kr/production-socialing/1762403818135-photo-jvmyr-1061517-0"></p><p><br></p><p><img class="ql-image image-loaded" src="http://images.munto.kr/production-socialing/1762510610347-photo-7v6jx-1061517-0"></p><p><br></p><p style="text-align: center">&lt;<strong>오늘의메뉴</strong>&gt; </p><p style="text-align: center">배달음식❌, 모두 직접 조리합니다 </p><p style="text-align: center">닭갈비떡볶이</p><p style="text-align: center">참치주먹밥</p><p style="text-align: center">트러플오일감자튀김</p><p style="text-align: center">야채튀김</p><p style="text-align: center">수제 고르곤졸라 +사양벌꿀</p><p style="text-align: center"><strong>“수제 매실주”</strong>,소,맥,탄산</p><p><br></p><p style="text-align: center">-----2차메뉴-----</p><p style="text-align: center">살라미with트러플오일</p><p style="text-align: center">버번위스키&amp;바닐라빈셔벗</p><p style="text-align: center">구운쥐포</p><p style="text-align: center">벨지안와플쿠키</p><p style="text-align: center">참치샐러드카나페</p><p><br></p><p><br></p><p><img class="ql-image image-loaded" src="http://images.munto.kr/production-socialing/1761468305734-photo-5qa6s-1061517-0"></p><p><br></p><p><br></p><p><br></p><p><br></p><p style="text-align: center">부담없이, 친구or인연을 만들 수 있는 소셜링입니다❤️</p><p><br></p><p><br></p><p><br></p></div>`,
+        }}
+      ></div>
+      <Activity mode={isShow ? 'hidden' : 'visible'}>
+        <div className="absolute bottom-0 z-1 w-full h-[120px] flex items-end bg-linear-to-b from-transparent to-white">
+          <button
+            className="w-full h-16 cursor-pointer rounded-tl-2xl rounded-tr-2xl bg-white"
+            onClick={onMoreContents}
+          >
+            펼치기
+          </button>
+        </div>
+      </Activity>
+    </div>
+  );
+}
+
+function NoticeSection() {
+  return (
+    <>
+      <SectionHeader title="안내사항" subText="자세한 정보를 알려드릴게요" />
+
+      <table className="w-full text-left">
+        <tbody>
+          <tr className="border-b border-gray-200">
+            <th className="py-2 px-4 w-32 text-gray-600 font-medium">카테고리</th>
+            <td className="py-2 px-4">파티 &gt; 컨셉파티</td>
+          </tr>
+          <tr className="border-b border-gray-200">
+            <th className="py-2 px-4 w-32 text-gray-600 font-medium">모집 방식</th>
+            <td className="py-2 px-4">모임형 소셜링 · 승인제 · 공개 모집</td>
+          </tr>
+          <tr className="border-b border-gray-200">
+            <th className="py-2 px-4 w-32 text-gray-600 font-medium">인원수</th>
+            <td className="py-2 px-4">최소 6명 ~ 최대 12명</td>
+          </tr>
+          <tr className="border-b border-gray-200">
+            <th className="py-2 px-4 w-32 text-gray-600 font-medium">가격</th>
+            <td className="py-2 px-4">안내사항 참고</td>
+          </tr>
+          <tr className="border-b border-gray-200">
+            <th className="py-2 px-4 w-32 text-gray-600 font-medium">장소</th>
+            <td className="py-2 px-4">서울 동작구</td>
+          </tr>
+        </tbody>
+      </table>
+    </>
+  );
+}
+
+function HostSection() {
+  return (
+    <div className="h-[400px]">
+      <SectionHeader title="호스트소개" subText="함께 할 호스트를 알려드릴게요." />
+      <div>홍길동</div>
+    </div>
+  );
+}
+
+function ReviewSection() {
+  return (
+    <div className="">
+      <SectionHeader title="리뷰" subText="같은 파티에 참석한 다른 사람들의 후기를 알려드릴게요" />
+      <div className="flex justify-center items-center p-10 bg-stone-100 rounded-xl text-stone-500 text-center">
+        아직 작성된 리뷰가 없습니다.
+        <br /> 파티에 참석 한 후 호스트를 위한 파티 리뷰를 작성 해주세요.
+      </div>
+    </div>
+  );
+}
+
+export default function PartyDetail() {
+  const [activeTab, setActiveTab] = useState('info');
+
+  const sectionRefs = useRef<Record<string, HTMLElement | null>>({
+    info: null,
+    notice: null,
+    host: null,
+    review: null,
+  });
+
+  const tabRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!tabRef.current) return;
+
+    const tabHeight = tabRef.current.offsetHeight;
+
+    const observer = new IntersectionObserver(
+      entries => {
+        const intersecting = entries.filter(e => e.isIntersecting);
+
+        if (intersecting.length > 0) {
+          const topMost = intersecting.reduce((a, b) => (a.boundingClientRect.top < b.boundingClientRect.top ? a : b));
+          setActiveTab(topMost.target.id);
+        } else if (window.scrollY < 10) {
+          setActiveTab('info');
+        }
+      },
+      {
+        root: null,
+        rootMargin: `-${tabHeight}px 0px 0px 0px`,
+        threshold: 0,
+      }
+    );
+
+    Object.values(sectionRefs.current).forEach(el => el && observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  const handleTabClick = (id: string) => {
+    const el = sectionRefs.current[id];
+    if (el && tabRef.current) {
+      const tabHeight = tabRef.current.offsetHeight;
+      window.scrollTo({
+        top: el.offsetTop - tabHeight,
+        behavior: 'smooth',
+      });
+      setActiveTab(id);
+    }
+  };
+
+  return (
+    <div className="relative md:grid grid-cols-[3fr_7fr] gap-14 container">
+      <StickyApplyBox />
+
+      <section>
+        <img src="/dummy.png" className="w-full rounded-2xl mb-8" />
+
+        <Tabs tabs={TABS} activeTab={activeTab} onClick={handleTabClick} tabRef={tabRef} />
+
+        {/* 실제 섹션 */}
+        <div className="space-y-8">
+          <section
+            id="info"
+            className="mb-12"
+            ref={el => {
+              sectionRefs.current.info = el;
+            }}
+          >
+            <InfoSection innerHtml={''} />
+          </section>
+
+          <section
+            id="notice"
+            className="mb-12"
+            ref={el => {
+              sectionRefs.current.notice = el;
+            }}
+          >
+            <NoticeSection />
+          </section>
+
+          <section
+            id="host"
+            className="mb-12"
+            ref={el => {
+              sectionRefs.current.host = el;
+            }}
+          >
+            <HostSection />
+          </section>
+
+          <section
+            id="review"
+            className="mb-12"
+            ref={el => {
+              sectionRefs.current.review = el;
+            }}
+          >
+            <ReviewSection />
+          </section>
+        </div>
+      </section>
+    </div>
+  );
+}
