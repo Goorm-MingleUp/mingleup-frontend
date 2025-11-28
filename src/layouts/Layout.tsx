@@ -8,7 +8,51 @@ import {Link} from '../components/Link';
 import PopupComponent from '../components/popup/Popup';
 import {useEffect, useState} from 'react';
 
+export function parseJwt(token: string) {
+  try {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    return JSON.parse(atob(base64));
+  } catch (e) {
+    return null;
+  }
+}
+
+export function useTokenExpireRedirect() {
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) return;
+
+    const payload = parseJwt(token);
+    if (!payload?.exp) return;
+
+    const now = Math.floor(Date.now() / 1000);
+    const expiresIn = payload.exp - now;
+
+    // 55분 = 3300초
+    const logoutTime = expiresIn - 60 * 5; // 만료 5분 전 → 조절 가능
+    if (logoutTime <= 0) {
+      redirectToLogin();
+      return;
+    }
+
+    const timer = setTimeout(() => {
+      redirectToLogin();
+    }, logoutTime * 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+}
+
+function redirectToLogin() {
+  localStorage.removeItem('token');
+  localStorage.removeItem('userId');
+  localStorage.removeItem('name');
+  window.location.href = '/login';
+}
+
 export default function Layout({children}: {children: React.ReactNode}) {
+  useTokenExpireRedirect();
   return (
     <>
       <Header />
@@ -20,7 +64,9 @@ export default function Layout({children}: {children: React.ReactNode}) {
 }
 
 /** ================= Header ================= */
-function Header() {
+
+function UserDropdown() {
+  const [open, setOpen] = useState(false);
   const [name, setName] = useState<string | null>(null);
 
   // 클라이언트에서만 localStorage 접근
@@ -29,13 +75,51 @@ function Header() {
   }, []);
 
   return (
+    <div
+      className="relative inline-block"
+      onMouseEnter={() => name && setOpen(true)}
+      onMouseLeave={() => name && setOpen(false)}
+    >
+      {/* 이름 또는 로그인 링크 */}
+      {name ? <strong className="font-normal cursor-pointer">{name}님</strong> : <Link href="/login">로그인</Link>}
+
+      {/* 드롭다운 */}
+      {open && (
+        <div className="absolute left-1/2 -translate-x-1/2 mt-2 w-40 bg-white p-2 pt-4 border border-gray-200 rounded-md shadow-md z-10">
+          {/* 말풍선 삼각형 */}
+          <div
+            className="absolute -top-2 left-1/2 -translate-x-1/2 w-3 h-3 bg-white rotate-45 border-l border-t border-gray-200"
+            aria-hidden
+          ></div>
+
+          <ul className="flex flex-col justify-center items-center">
+            <li className="w-full">
+              <a href="/my" className="inline-block px-2 py-2.5 w-full text-center hover:bg-[#F8E8EE] rounded">
+                마이페이지
+              </a>
+            </li>
+            <li className="w-full">
+              <a href="#" className="inline-block px-2 py-2.5 w-full text-center hover:bg-[#F8E8EE] rounded">
+                로그아웃
+              </a>
+            </li>
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function Header() {
+  return (
     <div id="header" className="fixed top-0 w-full bg-white box-border border-b border-b-gray-200 z-10">
       <header className="flex shrink-0 items-center justify-between container h-20">
         <div className="flex items-center gap-32">
           <Logo />
           <Link href="/party">파티</Link>
         </div>
-        <div>{name ? <strong className="font-normal">{name + '님'}</strong> : <Link href="/login">로그인</Link>}</div>
+
+        <UserDropdown />
       </header>
     </div>
   );
