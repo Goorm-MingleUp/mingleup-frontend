@@ -7,7 +7,6 @@ function PartyList() {
   const parties = partyResource.read();
   const ds = async () => {
     const res = await Http.get('parties?page=1&limit=12');
-    console.log(res);
   };
 
   useEffect(() => {
