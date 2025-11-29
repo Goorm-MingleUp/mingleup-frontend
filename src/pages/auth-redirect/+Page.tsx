@@ -25,5 +25,5 @@ export default function AuthRedirect() {
     }
   }, []);
 
-  return <div>로그인 처리 중...</div>;
+  return <div className="flex justify-center items-center p-4">로그인 처리 중...</div>;
 }
