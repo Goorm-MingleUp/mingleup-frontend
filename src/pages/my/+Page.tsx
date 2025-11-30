@@ -111,29 +111,77 @@ function MyWishListt() {
     }
   }
 
+  async function fetchdkUser() {
+    if (typeof window === 'undefined') return null; // 서버에서는 실행하지 않음
+
+    const token = localStorage.getItem('token');
+    if (!token) return null;
+
+    try {
+      const res = await Http.get<{result: IResWishList}>('applications/me', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setWishListt(res.data.result);
+
+      console.log(res.data);
+
+      if (!res) {
+        console.error('Failed to fetch user:', res);
+        return null;
+      }
+    } catch (err) {
+      console.error('Fetch error:', err);
+      return null;
+    }
+  }
+
   useEffect(() => {
-    fetchUser();
+    // fetchUser();
+    fetchdkUser();
   }, []);
 
   return (
     <div className="container">
-      <div className="mb-4">
-        <h2 className="text-2xl font-semibold">내가 찜한 파티</h2>
-      </div>
+      <section className="mb-6">
+        <div className="mb-4">
+          <h2 className="text-2xl font-semibold">내가 신청한 파티</h2>
+        </div>
 
-      <div>
-        {!wishListt?.content?.length ? (
-          <div className="flex flex-col items-center justify-center gap-4 p-4 rounded-xl bg-gray-100 ">
-            <p className="text-gray-500 text-center">찜한 파티가 없어요. 추천하는 파티를 보러가요.</p>
+        <div>
+          {!wishListt?.content?.length ? (
+            <div className="flex flex-col items-center justify-center gap-4 p-4 rounded-xl bg-gray-100 ">
+              <p className="text-gray-500 text-center">아직 신청한 파티가 없어요. 추천하는 파티를 보러가요.</p>
 
-            <a href="/party" className="px-4 py-2 rounded-md  cursor-pointer hover:opacity-50">
-              파티 찾아보기 &gt;
-            </a>
-          </div>
-        ) : (
-          <></>
-        )}
-      </div>
+              <a href="/party" className="px-4 py-2 rounded-md  cursor-pointer hover:opacity-50">
+                파티 찾아보기 &gt;
+              </a>
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
+      </section>
+
+      <section>
+        <div className="mb-4">
+          <h2 className="text-2xl font-semibold">내가 찜한 파티</h2>
+        </div>
+        <div>
+          {!wishListt?.content?.length ? (
+            <div className="flex flex-col items-center justify-center gap-4 p-4 rounded-xl bg-gray-100 ">
+              <p className="text-gray-500 text-center">찜한 파티가 없어요. 추천하는 파티를 보러가요.</p>
+
+              <a href="/party" className="px-4 py-2 rounded-md  cursor-pointer hover:opacity-50">
+                파티 찾아보기 &gt;
+              </a>
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
+      </section>
     </div>
   );
 }
