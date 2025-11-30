@@ -40,7 +40,7 @@ function PartyAccession() {
       );
 
       if (res) {
-        addToast('작업이 완료되었습니다.');
+        addToast('파티신청이 완료 되었어요!');
         navigate('/');
       }
     } catch (error) {}

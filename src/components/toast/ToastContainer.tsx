@@ -5,10 +5,21 @@ export function ToastContainer() {
   const removeToast = useToastStore(s => s.removeToast);
 
   return (
-    <div className="fixed bottom-4 right-4 space-y-2">
+    <div className="fixed top-22 left-1/2 -translate-x-1/2 space-y-2 z-20">
       {toasts.map(t => (
-        <div key={t.id} className="bg-black text-white px-4 py-2 rounded-xl animate-fade-in">
-          {t.message}
+        <div
+          key={t.id}
+          className="flex items-center justify-between min-w-3xs bg-black text-white px-6 py-2.5 rounded-xl animate-fade-in shadow-lg"
+        >
+          <span> {t.message}</span>
+
+          <button
+            onClick={() => {
+              removeToast(t.id);
+            }}
+          >
+            X
+          </button>
         </div>
       ))}
     </div>
