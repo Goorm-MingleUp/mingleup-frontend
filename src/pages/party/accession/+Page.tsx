@@ -4,6 +4,7 @@ import {usePageContext} from 'vike-react/usePageContext';
 import Http from '../../../utils/HTTP';
 import {navigate} from 'vike/client/router';
 import {useToastStore} from '../../../store/toastStore';
+import {isAxiosError} from 'axios';
 
 interface IResParty {
   answerText: string;
@@ -43,7 +44,11 @@ function PartyAccession() {
         addToast('파티신청이 완료 되었어요!');
         navigate('/');
       }
-    } catch (error) {}
+    } catch (error) {
+      if (isAxiosError(error) && error.response?.status === 409) {
+        addToast('이미 신청한 파티예요!');
+      }
+    }
   };
 
   return (

@@ -1,4 +1,6 @@
-import axios, {type AxiosInstance} from 'axios';
+import axios, {type AxiosInstance, isAxiosError} from 'axios';
+import {navigate} from 'vike/client/router';
+// import { useToastStore } from '@/store/toastStore';
 
 export interface IURL {
   BACKEND_URL?: string;
@@ -25,13 +27,11 @@ export const config: IConfig = {
 };
 
 /**
- * axios 생성
+ * Axios 인스턴스 생성
  */
 const Http: AxiosInstance = axios.create({
   baseURL: config.Url.BACKEND_URL,
   headers: {
-    // 외부에서 처리하는게 맞다고 생각함
-    // enctype: "multipart/form-data",
     'Cache-Control': 'no-cache',
     'Content-Type': 'application/json',
     Accept: 'application/hal+json',
@@ -43,8 +43,50 @@ const Http: AxiosInstance = axios.create({
 });
 
 /**
- * 서버에서 반환되는 JSON 값 설정
- * RES 리턴을 상속 구현으로 변경처리
+ * 요청 인터셉터: 토큰 자동 주입
+ */
+Http.interceptors.request.use(req => {
+  if (typeof window !== 'undefined') {
+    const token = localStorage.getItem(config.token.name);
+    if (token && req.headers) {
+      req.headers[config.token.header] = `Bearer ${token}`;
+    }
+  }
+  return req;
+});
+
+/**
+ * 응답 인터셉터: 공통 에러 처리
+ */
+Http.interceptors.response.use(
+  res => res, // 성공 요청은 그대로 반환
+  error => {
+    if (isAxiosError(error)) {
+      const status = error.response?.status;
+
+      switch (status) {
+        case 401:
+          navigate('/login');
+          break;
+
+        case 409:
+          break;
+
+        case 500:
+          // useToastStore.getState().addToast('서버 오류가 발생했습니다.');
+          break;
+      }
+    } else {
+      // 네트워크 오류 등 Axios가 아닌 경우
+      // useToastStore.getState().addToast('서버와 연결할 수 없습니다.');
+    }
+
+    return Promise.reject(error); // 컴포넌트에서 catch 가능
+  }
+);
+
+/**
+ * 서버에서 반환되는 JSON 타입
  */
 export interface AbsIRes<T, P = undefined> {
   success?: boolean;
